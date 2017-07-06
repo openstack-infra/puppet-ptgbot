@@ -4,6 +4,7 @@ class ptgbot(
   $nick,
   $password,
   $channel,
+  $vhost_name,
 ) {
 
   user { 'ptgbot':
@@ -132,6 +133,15 @@ class ptgbot(
     replace => true,
     require => User['ptgbot'],
   }
+
+  ::httpd::vhost { $vhost_name:
+    port     => 80,
+    docroot  => '/var/lib/ptgbot/www',
+    priority => '50',
+    template => 'ptgbot/vhost.erb',
+    require  => File['/var/lib/ptgbot/www'],
+  }
+
 }
 
 # vim:sw=2:ts=2:expandtab:textwidth=79
