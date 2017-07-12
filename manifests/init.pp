@@ -93,7 +93,7 @@ class ptgbot(
   file { '/var/lib/ptgbot/www/ptg.html':
     ensure    => present,
     group     => 'ptgbot',
-    mode      => '0440',
+    mode      => '0444',
     owner     => 'root',
     replace   => true,
     require   => [File['/var/lib/ptgbot/www'],
@@ -105,7 +105,7 @@ class ptgbot(
   file { '/var/lib/ptgbot/www/ptg.js':
     ensure    => present,
     group     => 'ptgbot',
-    mode      => '0440',
+    mode      => '0444',
     owner     => 'root',
     replace   => true,
     require   => [File['/var/lib/ptgbot/www'],
