@@ -135,11 +135,12 @@ class ptgbot(
   }
 
   ::httpd::vhost { $vhost_name:
-    port     => 80,
-    docroot  => '/var/lib/ptgbot/www',
-    priority => '50',
-    template => 'ptgbot/vhost.erb',
-    require  => File['/var/lib/ptgbot/www'],
+    port       => 80,
+    docroot    => '/var/lib/ptgbot/www',
+    priority   => '50',
+    template   => 'ptgbot/vhost.erb',
+    require    => File['/var/lib/ptgbot/www'],
+    vhost_name => $vhost_name,
   }
 
 }
