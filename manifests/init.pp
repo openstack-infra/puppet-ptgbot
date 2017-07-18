@@ -5,6 +5,9 @@ class ptgbot(
   $password,
   $channel,
   $vhost_name,
+  $ethercalc = 'https://ethercalc.openstack.org',
+  $pads = 'https://wiki.openstack.org/wiki/PTG/Pike/Etherpads',
+  $sheet = 'Pike-PTG-Discussion-Rooms',
 ) {
 
   user { 'ptgbot':
@@ -88,6 +91,15 @@ class ptgbot(
     mode    => '0775',
     require => [File['/var/lib/ptgbot'],
                 User['ptgbot']]
+  }
+
+  file { '/var/lib/ptgbot/www/index.html':
+    ensure  => present,
+    content => template('ptgbot/index.html.erb'),
+    group   => 'root',
+    mode    => '0444',
+    owner   => 'root',
+    require => File['/var/lib/ptgbot/www'],
   }
 
   file { '/var/lib/ptgbot/www/ptg.html':
