@@ -114,6 +114,18 @@ class ptgbot(
     subscribe => Vcsrepo['/opt/ptgbot'],
   }
 
+  file { '/var/lib/ptgbot/www/bootstrap-3.3.7.min.css':
+    ensure    => present,
+    group     => 'ptgbot',
+    mode      => '0444',
+    owner     => 'root',
+    replace   => true,
+    require   => [File['/var/lib/ptgbot/www'],
+                  User['ptgbot']],
+    source    => '/opt/ptgbot/html/bootstrap-3.3.7.min.css',
+    subscribe => Vcsrepo['/opt/ptgbot'],
+  }
+
   file { '/var/lib/ptgbot/www/ptg.js':
     ensure    => present,
     group     => 'ptgbot',
@@ -123,6 +135,30 @@ class ptgbot(
     require   => [File['/var/lib/ptgbot/www'],
                   User['ptgbot']],
     source    => '/opt/ptgbot/html/ptg.js',
+    subscribe => Vcsrepo['/opt/ptgbot'],
+  }
+
+  file { '/var/lib/ptgbot/www/jquery-1.9.1.min.js':
+    ensure    => present,
+    group     => 'ptgbot',
+    mode      => '0444',
+    owner     => 'root',
+    replace   => true,
+    require   => [File['/var/lib/ptgbot/www'],
+                  User['ptgbot']],
+    source    => '/opt/ptgbot/html/jquery-1.9.1.min.js',
+    subscribe => Vcsrepo['/opt/ptgbot'],
+  }
+
+  file { '/var/lib/ptgbot/www/handlebars-4.0.6.js':
+    ensure    => present,
+    group     => 'ptgbot',
+    mode      => '0444',
+    owner     => 'root',
+    replace   => true,
+    require   => [File['/var/lib/ptgbot/www'],
+                  User['ptgbot']],
+    source    => '/opt/ptgbot/html/handlebars-4.0.6.js',
     subscribe => Vcsrepo['/opt/ptgbot'],
   }
 
