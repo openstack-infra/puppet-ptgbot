@@ -9,6 +9,7 @@ class ptgbot(
   $pads = 'https://wiki.openstack.org/wiki/PTG/Queens/Etherpads',
   $sheet = 'Queens-PTG-Discussion-Rooms',
 ) {
+  include ::pip
 
   user { 'ptgbot':
     ensure     => present,
@@ -34,6 +35,7 @@ class ptgbot(
     command     => 'pip3 install /opt/ptgbot',
     path        => '/usr/local/bin:/usr/bin:/bin/',
     refreshonly => true,
+    require     => Class['pip'],
     subscribe   => Vcsrepo['/opt/ptgbot'],
   }
 
