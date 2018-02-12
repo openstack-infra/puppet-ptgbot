@@ -1,0 +1,9 @@
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Mon, 12 Feb 2018 21:46:03 +0000
+Reviewed-on: https://review.openstack.org/543437
+Project: openstack-infra/puppet-ptgbot
+Branch: refs/heads/master
