@@ -6,34 +6,576 @@
   "irc_channel": "<%= @channel %>",
   "db_filename": "/var/lib/ptgbot/www/ptg.json",
   "log_config": "/etc/ptgbot/logging.config",
-  "ethercalc_url": "<%= @ethercalc %>/_/<%= @sheet %>/cells",
-  "ethercalc_cells": {
-    "room_line": "8",
-    "time_column": "A",
-    "time_range": [ 9, 23 ],
-    "days": [
+  "slots": {
+    "Monday": [
       {
-        "B": ["14", "15", "16", "17", "18", "19", "20", "21", "22", "23"],
-        "C": ["15"],
-        "D": ["15"]
+        "name": "MonA1",
+        "desc": "09:00-10:45"
       },
       {
-        "E": ["14", "15", "16"],
-        "F": ["15"],
-        "G": ["15"]
+        "name": "MonA2",
+        "desc": "10:45-12:30"
       },
       {
-        "H": ["14", "15", "16"],
-        "I": ["15"]
+        "name": "MonP1",
+        "desc": "13:30-15:15"
       },
       {
-        "J": ["14", "15", "16"],
-        "K": ["15"]
-      },
-      {
-        "L": ["14", "15", "16"],
-        "M": ["15"]
+        "name": "MonP2",
+        "desc": "15:15-17:00"
       }
+    ],
+    "Tuesday": [
+      {
+        "name": "TueA1",
+        "desc": "09:00-10:45"
+      },
+      {
+        "name": "TueA2",
+        "desc": "10:45-12:30"
+      },
+      {
+        "name": "TueP1",
+        "desc": "13:30-15:15"
+      },
+      {
+        "name": "TueP2",
+        "desc": "15:15-17:00"
+      }
+    ],
+    "Wednesday": [
+      {
+        "name": "WedA1",
+        "desc": "09:00-10:45"
+      },
+      {
+        "name": "WedA2",
+        "desc": "10:45-12:30"
+      },
+      {
+        "name": "WedP1",
+        "desc": "13:30-15:15"
+      },
+      {
+        "name": "WedP2",
+        "desc": "15:15-17:00"
+      }
+    ],
+    "Thursday": [
+      {
+        "name": "ThuA1",
+        "desc": "09:00-10:45"
+      },
+      {
+        "name": "ThuA2",
+        "desc": "10:45-12:30"
+      },
+      {
+        "name": "ThuP1",
+        "desc": "13:30-15:15"
+      },
+      {
+        "name": "ThuP2",
+        "desc": "15:15-17:00"
+      }
+    ],
+    "Friday": [
+      {
+        "name": "FriA1",
+        "desc": "09:00-10:45"
+      },
+      {
+        "name": "FriA2",
+        "desc": "10:45-12:30"
+      },
+      {
+        "name": "FriP1",
+        "desc": "13:30-15:15"
+      },
+      {
+        "name": "FriP2",
+        "desc": "15:15-17:00"
+      }
+    ]
+  },
+  "scheduled": {
+    "Hogan Mezzanine 1": {
+      "MonA1": "identity-integration",
+      "MonA2": "identity-integration",
+      "MonP1": "identity-integration",
+      "MonP2": "identity-integration",
+      "TueA1": "identity-integration",
+      "TueA2": "identity-integration",
+      "TueP1": "identity-integration",
+      "TueP2": "identity-integration",
+      "WedA1": "tripleo",
+      "WedA2": "tripleo",
+      "WedP1": "tripleo",
+      "WedP2": "tripleo",
+      "ThuA1": "tripleo",
+      "ThuA2": "tripleo",
+      "ThuP1": "tripleo",
+      "ThuP2": "tripleo",
+      "FriA1": "tripleo",
+      "FriA2": "tripleo",
+      "FriP1": "tripleo",
+      "FriP2": "tripleo"
+    },
+    "Hogan Mezzanine 2": {
+      "MonA1": "upgrades",
+      "MonA2": "upgrades",
+      "MonP1": "upgrades",
+      "MonP2": "upgrades",
+      "TueA1": "",
+      "TueA2": "",
+      "TueP1": "release-cycles",
+      "TueP2": "release-cycles",
+      "WedA1": "kolla",
+      "WedA2": "kolla",
+      "WedP1": "kolla",
+      "WedP2": "kolla",
+      "ThuA1": "kolla",
+      "ThuA2": "kolla",
+      "ThuP1": "kolla",
+      "ThuP2": "kolla",
+      "FriA1": "kolla",
+      "FriA2": "kolla",
+      "FriP1": "kolla",
+      "FriP2": "kolla"
+    },
+    "Hogan Suite": {},
+    "Nally Suite": {
+      "MonA1": "api-sig",
+      "MonA2": "api-sig",
+      "MonP1": "api-sig",
+      "MonP2": "api-sig",
+      "TueA1": "k8s-sig",
+      "TueA2": "k8s-sig",
+      "TueP1": "k8s-sig",
+      "TueP2": "k8s-sig",
+      "WedA1": "neutron",
+      "WedA2": "neutron",
+      "WedP1": "neutron",
+      "WedP2": "neutron",
+      "ThuA1": "neutron",
+      "ThuA2": "neutron",
+      "ThuP1": "neutron",
+      "ThuP2": "neutron",
+      "FriA1": "neutron",
+      "FriA2": "neutron",
+      "FriP1": "neutron",
+      "FriP2": "neutron"
+    },
+    "Davin Suite": {
+      "MonA1": "infra-helproom",
+      "MonA2": "infra-helproom",
+      "MonP1": "infra-helproom",
+      "MonP2": "infra-helproom",
+      "TueA1": "infra-helproom",
+      "TueA2": "infra-helproom",
+      "TueP1": "infra-helproom",
+      "TueP2": "infra-helproom",
+      "WedA1": "nova",
+      "WedA2": "nova",
+      "WedP1": "nova",
+      "WedP2": "nova",
+      "ThuA1": "nova",
+      "ThuA2": "nova",
+      "ThuP1": "nova",
+      "ThuP2": "nova",
+      "FriA1": "nova",
+      "FriA2": "nova",
+      "FriP1": "nova",
+      "FriP2": "nova"
+    },
+    "Celtic Suite": {
+      "MonA1": "edge",
+      "MonA2": "edge",
+      "MonP1": "edge",
+      "MonP2": "edge",
+      "TueA1": "edge",
+      "TueA2": "edge",
+      "TueP1": "edge",
+      "TueP2": "edge",
+      "WedA1": "ironic",
+      "WedA2": "ironic",
+      "WedP1": "ironic",
+      "WedP2": "ironic",
+      "ThuA1": "ironic",
+      "ThuA2": "ironic",
+      "ThuP1": "ironic",
+      "ThuP2": "ironic",
+      "FriA1": "ironic",
+      "FriA2": "ironic",
+      "FriP1": "ironic",
+      "FriP2": "ironic"
+    },
+    "Canal Cafe": {},
+    "Canal Suite 3": {
+      "MonA1": "first-contact",
+      "MonA2": "first-contact",
+      "MonP1": "first-contact",
+      "MonP2": "first-contact",
+      "TueA1": "oslo",
+      "TueA2": "oslo",
+      "TueP1": "oslo",
+      "TueP2": "oslo",
+      "WedA1": "swift",
+      "WedA2": "swift",
+      "WedP1": "swift",
+      "WedP2": "swift",
+      "ThuA1": "swift",
+      "ThuA2": "swift",
+      "ThuP1": "swift",
+      "ThuP2": "swift",
+      "FriA1": "swift",
+      "FriA2": "swift",
+      "FriP1": "swift",
+      "FriP2": "swift"
+    },
+    "Coiste Bainisti": {
+      "FriA1": "tc",
+      "FriA2": "tc"
+    },
+    "Boardroom": {},
+    "Suite 681+682": {
+      "MonA1": "horizon",
+      "MonA2": "horizon",
+      "MonP1": "horizon",
+      "MonP2": "horizon",
+      "TueA1": "horizon",
+      "TueA2": "horizon",
+      "TueP1": "horizon",
+      "TueP2": "horizon",
+      "WedA1": "keystone",
+      "WedA2": "keystone",
+      "WedP1": "keystone",
+      "WedP2": "keystone",
+      "ThuA1": "keystone",
+      "ThuA2": "keystone",
+      "ThuP1": "keystone",
+      "ThuP2": "keystone",
+      "FriA1": "keystone",
+      "FriA2": "keystone",
+      "FriP1": "keystone",
+      "FriP2": "keystone"
+    },
+    "Suite 683+684": {
+      "TueA1": "scientific-sig",
+      "TueA2": "scientific-sig",
+      "TueP1": "self-healing",
+      "TueP2": "self-healing",
+      "WedA1": "cinder",
+      "WedA2": "cinder",
+      "WedP1": "cinder",
+      "WedP2": "cinder",
+      "ThuA1": "cinder",
+      "ThuA2": "cinder",
+      "ThuP1": "cinder",
+      "ThuP2": "cinder",
+      "FriA1": "cinder",
+      "FriA2": "cinder",
+      "FriP1": "cinder",
+      "FriP2": "cinder"
+    },
+    "Suite 679+680": {
+      "MonA1": "docs-i18n",
+      "MonA2": "docs-i18n",
+      "MonP1": "docs-i18n",
+      "MonP2": "docs-i18n",
+      "TueA1": "docs-i18n",
+      "TueA2": "docs-i18n",
+      "TueP1": "docs-i18n",
+      "TueP2": "docs-i18n",
+      "WedA1": "infra",
+      "WedA2": "infra",
+      "WedP1": "infra",
+      "WedP2": "infra",
+      "ThuA1": "infra",
+      "ThuA2": "infra",
+      "ThuP1": "infra",
+      "ThuP2": "infra",
+      "FriA1": "infra",
+      "FriA2": "infra",
+      "FriP1": "infra",
+      "FriP2": "infra"
+    },
+    "Suite 688+689": {
+      "MonA1": "watcher",
+      "MonA2": "watcher",
+      "MonP1": "watcher",
+      "MonP2": "watcher",
+      "TueA1": "watcher",
+      "TueA2": "watcher",
+      "TueP1": "watcher",
+      "TueP2": "watcher",
+      "WedA1": "magnum",
+      "WedA2": "magnum",
+      "WedP1": "magnum",
+      "WedP2": "magnum",
+      "ThuA1": "magnum",
+      "ThuA2": "magnum",
+      "ThuP1": "helm",
+      "ThuP2": "helm",
+      "FriA1": "helm",
+      "FriA2": "helm",
+      "FriP1": "helm",
+      "FriP2": "helm"
+    },
+    "Suite 686": {
+      "MonA1": "goals-helproom",
+      "MonA2": "goals-helproom",
+      "MonP1": "goals-helproom",
+      "MonP2": "goals-helproom",
+      "TueA1": "goals-helproom",
+      "TueA2": "goals-helproom",
+      "TueP1": "goals-helproom",
+      "TueP2": "goals-helproom",
+      "WedA1": "ansible",
+      "WedA2": "ansible",
+      "WedP1": "ansible",
+      "WedP2": "ansible",
+      "ThuA1": "ansible",
+      "ThuA2": "ansible",
+      "ThuP1": "ansible",
+      "ThuP2": "ansible",
+      "FriA1": "ansible",
+      "FriA2": "ansible",
+      "FriP1": "ansible",
+      "FriP2": "ansible"
+    },
+    "Suite 691": {
+      "MonA1": "security",
+      "MonA2": "security",
+      "MonP1": "security",
+      "MonP2": "security",
+      "TueA1": "manila",
+      "TueA2": "manila",
+      "TueP1": "manila",
+      "TueP2": "manila",
+      "WedA1": "glance",
+      "WedA2": "glance",
+      "WedP1": "glance",
+      "WedP2": "glance",
+      "ThuA1": "glance",
+      "ThuA2": "glance",
+      "ThuP1": "glance",
+      "ThuP2": "glance",
+      "FriA1": "glance",
+      "FriA2": "glance",
+      "FriP1": "glance",
+      "FriP2": "glance"
+    },
+    "Suite 690": {
+      "MonA1": "publiccloud-wg",
+      "MonA2": "publiccloud-wg",
+      "MonP1": "publiccloud-wg",
+      "MonP2": "publiccloud-wg",
+      "TueA1": "publiccloud-wg",
+      "TueA2": "publiccloud-wg",
+      "TueP1": "publiccloud-wg",
+      "TueP2": "publiccloud-wg",
+      "WedA1": "octavia",
+      "WedA2": "octavia",
+      "WedP1": "octavia",
+      "WedP2": "octavia",
+      "ThuA1": "octavia",
+      "ThuA2": "octavia",
+      "ThuP1": "octavia",
+      "ThuP2": "octavia",
+      "FriA1": "octavia",
+      "FriA2": "octavia",
+      "FriP1": "octavia",
+      "FriP2": "octavia"
+    },
+    "Suite 687": {
+      "MonA1": "blazar",
+      "MonA2": "blazar",
+      "MonP1": "blazar",
+      "MonP2": "blazar",
+      "TueA1": "blazar",
+      "TueA2": "blazar",
+      "TueP1": "blazar",
+      "TueP2": "blazar",
+      "WedA1": "heat",
+      "WedA2": "heat",
+      "WedP1": "heat",
+      "WedP2": "heat",
+      "ThuA1": "heat",
+      "ThuA2": "heat",
+      "ThuP1": "heat",
+      "ThuP2": "heat",
+      "FriA1": "heat",
+      "FriA2": "heat",
+      "FriP1": "heat",
+      "FriP2": "heat"
+    },
+    "Suite 665": {
+      "MonA1": "cyborg",
+      "MonA2": "cyborg",
+      "MonP1": "cyborg",
+      "MonP2": "cyborg",
+      "TueA1": "cyborg",
+      "TueA2": "cyborg",
+      "TueP1": "cyborg",
+      "TueP2": "cyborg",
+      "WedA1": "qa",
+      "WedA2": "qa",
+      "WedP1": "qa",
+      "WedP2": "qa",
+      "ThuA1": "qa",
+      "ThuA2": "qa",
+      "ThuP1": "qa",
+      "ThuP2": "qa",
+      "FriA1": "qa",
+      "FriA2": "qa",
+      "FriP1": "qa",
+      "FriP2": "qa"
+    },
+    "Suite 664": {
+      "MonA1": "vitrage",
+      "MonA2": "vitrage",
+      "MonP1": "vitrage",
+      "MonP2": "vitrage",
+      "TueA1": "vitrage",
+      "TueA2": "vitrage",
+      "TueP1": "vitrage",
+      "TueP2": "vitrage",
+      "WedA1": "vitrage",
+      "WedA2": "vitrage",
+      "WedP1": "vitrage",
+      "WedP2": "vitrage",
+      "ThuA1": "sahara",
+      "ThuA2": "sahara",
+      "ThuP1": "sahara",
+      "ThuP2": "sahara",
+      "FriA1": "sahara",
+      "FriA2": "sahara",
+      "FriP1": "sahara",
+      "FriP2": "sahara"
+    },
+    "Suite 663": {
+      "TueA1": "uc",
+      "TueA2": "uc",
+      "TueP1": "uc",
+      "TueP2": "uc",
+      "WedA1": "designate",
+      "WedA2": "designate",
+      "WedP1": "designate",
+      "WedP2": "designate",
+      "ThuA1": "designate",
+      "ThuA2": "designate",
+      "ThuP1": "designate",
+      "ThuP2": "designate",
+      "FriA1": "manila",
+      "FriA2": "manila",
+      "FriP1": "manila",
+      "FriP2": "manila"
+    },
+    "Suite 662": {
+      "TueA1": "kuryr",
+      "TueA2": "kuryr",
+      "TueP1": "kuryr",
+      "TueP2": "kuryr",
+      "WedA1": "kuryr",
+      "WedA2": "kuryr",
+      "WedP1": "kuryr",
+      "WedP2": "kuryr",
+      "ThuA1": "charms",
+      "ThuA2": "charms",
+      "ThuP1": "charms",
+      "ThuP2": "charms",
+      "FriA1": "charms",
+      "FriA2": "charms",
+      "FriP1": "charms",
+      "FriP2": "charms"
+    },
+    "Suite 661": {
+      "WedA1": "mistral",
+      "WedA2": "mistral",
+      "WedP1": "mistral",
+      "WedP2": "mistral",
+      "ThuA1": "mistral",
+      "ThuA2": "mistral",
+      "ThuP1": "mistral",
+      "ThuP2": "mistral"
+    },
+    "Suite 660": {
+      "WedA1": "monasca",
+      "WedA2": "monasca",
+      "WedP1": "monasca",
+      "WedP2": "monasca",
+      "ThuA1": "monasca",
+      "ThuA2": "monasca",
+      "ThuP1": "monasca",
+      "ThuP2": "monasca"
+    },
+    "Suite 659": {
+      "ThuA1": "interop",
+      "ThuA2": "interop",
+      "ThuP1": "interop",
+      "ThuP2": "interop",
+      "FriA1": "interop",
+      "FriA2": "interop",
+      "FriP1": "interop",
+      "FriP2": "interop"
+    }
+  },
+  "extrarooms": {
+    "Hogan Mezzanine 2": [
+      "TueA1", "TueA2"
+    ],
+    "Hogan Suite": [
+      "MonA1", "MonP1", "MonP2",
+      "TueA1", "TueP1", "TueP2",
+      "WedA1", "WedP1", "WedP2",
+      "ThuA1", "ThuP1", "ThuP2",
+      "FriA1", "FriP1", "FriP2"
+    ],
+    "Canal Cafe": [
+      "MonA1", "MonA2", "MonP1", "MonP2",
+      "TueA1", "TueA2", "TueP1", "TueP2",
+      "WedA1", "WedA2", "WedP1", "WedP2",
+      "ThuA1", "ThuA2", "ThuP1", "ThuP2",
+      "FriA1", "FriA2", "FriP1", "FriP2"
+    ],
+    "Coiste Bainisti": [
+      "MonA1", "MonA2", "MonP1", "MonP2",
+      "TueA1", "TueA2", "TueP1", "TueP2",
+      "WedA1", "WedA2", "WedP1", "WedP2",
+      "ThuA1", "ThuA2", "ThuP1", "ThuP2",
+      "FriP1", "FriP2"
+    ],
+    "Boardroom": [
+      "MonA1", "MonA2", "MonP1", "MonP2",
+      "TueA1", "TueA2", "TueP1", "TueP2",
+      "WedA1", "WedA2", "WedP1", "WedP2",
+      "ThuA1", "ThuA2", "ThuP1", "ThuP2",
+      "FriA1", "FriA2", "FriP1", "FriP2"
+    ],
+    "Suite 683+684": [
+      "MonA1", "MonA2", "MonP1", "MonP2"
+    ],
+    "Suite 663": [
+      "MonA1", "MonA2", "MonP1", "MonP2"
+    ],
+    "Suite 662": [
+      "MonA1", "MonA2", "MonP1", "MonP2"
+    ],
+    "Suite 661": [
+      "MonA1", "MonA2", "MonP1", "MonP2",
+      "TueA1", "TueA2", "TueP1", "TueP2",
+      "FriA1", "FriA2", "FriP1", "FriP2"
+    ],
+    "Suite 660": [
+      "MonA1", "MonA2", "MonP1", "MonP2",
+      "TueA1", "TueA2", "TueP1", "TueP2",
+      "FriA1", "FriA2", "FriP1", "FriP2"
+    ],
+    "Suite 659": [
+      "MonA1", "MonA2", "MonP1", "MonP2",
+      "TueA1", "TueA2", "TueP1", "TueP2",
+      "WedA1", "WedA2", "WedP1", "WedP2"
     ]
   }
 }

@@ -5,10 +5,8 @@ class ptgbot(
   $password,
   $channel,
   $vhost_name,
-  $ethercalc = 'https://ethercalc.openstack.org',
   $pads = 'https://wiki.openstack.org/wiki/PTG/Rocky/Etherpads',
   $cityguide = 'https://wiki.openstack.org/wiki/PTG/Rocky/CityGuide',
-  $sheet = 'Queens-PTG-Discussion-Rooms',
 ) {
   include ::pip
 
