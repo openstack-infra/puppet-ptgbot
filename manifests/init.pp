@@ -117,6 +117,18 @@ class ptgbot(
     subscribe => Vcsrepo['/opt/ptgbot'],
   }
 
+  file { '/var/lib/ptgbot/www/signage.html':
+    ensure    => present,
+    group     => 'ptgbot',
+    mode      => '0444',
+    owner     => 'root',
+    replace   => true,
+    require   => [File['/var/lib/ptgbot/www'],
+                  User['ptgbot']],
+    source    => '/opt/ptgbot/html/signage.html',
+    subscribe => Vcsrepo['/opt/ptgbot'],
+  }
+
   file { '/var/lib/ptgbot/www/bootstrap-3.3.7.min.css':
     ensure    => present,
     group     => 'ptgbot',
