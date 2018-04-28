@@ -207,13 +207,23 @@ class ptgbot(
     require => User['ptgbot'],
   }
 
-  ::httpd::vhost { $vhost_name:
-    port       => 80,
-    docroot    => '/var/lib/ptgbot/www',
-    priority   => '50',
-    template   => 'ptgbot/vhost.erb',
-    require    => File['/var/lib/ptgbot/www'],
-    vhost_name => $vhost_name,
+  if defined(Class['apache']) {
+    $docroot = '/var/lib/ptgbot/www'
+    $srvname = $vhost_name
+    ::apache::vhost::custom { $vhost_name:
+      priority   => '50',
+      content    => template('ptgbot/vhost.erb'),
+      require    => File['/var/lib/ptgbot/www'],
+    }
+  } else {
+    ::httpd::vhost { $vhost_name:
+      port       => 80,
+      docroot    => '/var/lib/ptgbot/www',
+      priority   => '50',
+      template   => 'ptgbot/vhost.erb',
+      require    => File['/var/lib/ptgbot/www'],
+      vhost_name => $vhost_name,
+    }
   }
 
 }
