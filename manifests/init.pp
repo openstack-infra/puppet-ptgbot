@@ -5,8 +5,8 @@ class ptgbot(
   $password,
   $channel,
   $vhost_name,
-  $pads = 'https://wiki.openstack.org/wiki/PTG/Rocky/Etherpads',
-  $cityguide = 'https://wiki.openstack.org/wiki/PTG/Rocky/CityGuide',
+  $pads = 'https://wiki.openstack.org/wiki/PTG/Stein/Etherpads',
+  $cityguide = 'https://wiki.openstack.org/wiki/PTG/Stein/CityGuide',
 ) {
   include ::pip
 
