@@ -5,9 +5,6 @@ class ptgbot(
   $password,
   $channel,
   $vhost_name,
-  $venuemap = 'https://www.openstack.org/assets/ptg/Denver-map.pdf',
-  $pads = 'https://wiki.openstack.org/wiki/PTG/Stein/Etherpads',
-  $cityguide = 'https://wiki.openstack.org/wiki/PTG/Stein/CityGuide',
 ) {
   include ::pip
 
@@ -97,11 +94,14 @@ class ptgbot(
 
   file { '/var/lib/ptgbot/www/index.html':
     ensure  => present,
-    content => template('ptgbot/index.html.erb'),
-    group   => 'root',
+    group   => 'ptgbot',
     mode    => '0444',
     owner   => 'root',
-    require => File['/var/lib/ptgbot/www'],
+    replace   => true,
+    require   => [File['/var/lib/ptgbot/www'],
+                  User['ptgbot']],
+    source    => '/opt/ptgbot/html/index.html',
+    subscribe => Vcsrepo['/opt/ptgbot'],
   }
 
   file { '/var/lib/ptgbot/www/ptg.html':
@@ -161,6 +161,18 @@ class ptgbot(
     require   => [File['/var/lib/ptgbot/www'],
                   User['ptgbot']],
     source    => '/opt/ptgbot/html/ptg.js',
+    subscribe => Vcsrepo['/opt/ptgbot'],
+  }
+
+  file { '/var/lib/ptgbot/www/index.js':
+    ensure    => present,
+    group     => 'ptgbot',
+    mode      => '0444',
+    owner     => 'root',
+    replace   => true,
+    require   => [File['/var/lib/ptgbot/www'],
+                  User['ptgbot']],
+    source    => '/opt/ptgbot/html/index.js',
     subscribe => Vcsrepo['/opt/ptgbot'],
   }
 
